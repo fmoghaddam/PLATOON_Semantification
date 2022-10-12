@@ -10,7 +10,6 @@ This repository contains the following files and folder:
 
 | File/Folder Name    | Description                                                        |
 |---------------------|--------------------------------------------------------------------|
-| DeTrusty            | DeTrusty JSON configuration                                        |
 | engiedata           | Raw CSV Data                                                       |
 | scripts             | Python scripts to upload RDF to Virtouso, parse mapping, ...       |
 | config.ini          | DeTrusty Configuration                                             |
