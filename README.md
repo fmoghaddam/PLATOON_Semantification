@@ -37,7 +37,7 @@ The data which is used for testing is Engie CSV dataset which can be found in th
 | mapping1.ttl        | RML file for occupancydata1                           |        |
 | mapping2.ttl        | RML file for occupancydata2                           |        |
 
-If you want to use other files in the process, you need to just rename your desired files to `occupancydata1` and `occupancydata2`.
+If you want to use other files in the process, you need to just rename your desired files to `occupancydata1` and `occupancydata2`. The current version is 1M dataset.
 
 
 ## How to run
