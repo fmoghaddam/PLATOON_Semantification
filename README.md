@@ -2,9 +2,27 @@
 
 This document contains information about how to run RDFizer (Semantic Adaptor) and DeTrusty (FQE) as docker containers for testing the performance.
 
+
+## Folder Structure
+
+This repository contains the following files and folder:
+
+
+| File/Folder Name    | Description                                                        |
+|---------------------|--------------------------------------------------------------------|
+| DeTrusty            | DeTrusty JSON configuration                                        |
+| engiedata           | Raw CSV Data                                                       |
+| scripts             | Python scripts to upload RDF to Virtouso, parse mapping, ...       |
+| config.ini          | DeTrusty Configuration                                             |
+| config_rdfizer1.ini | RDFizer Configuration for the first part of data (occupancydata1)  |
+| config_rdfizer2.ini | RDFizer Configuration for the second part of data (occupancydata2) |
+| docker-compose.yml  | Docker compose file                                                |
+| Makefile            | Makefile containing all the commands                               |
+| README.md           | ReadMe file                                                        |
+
 ## Data
 
-The data which is used is Engie CSV dataset which can be found in the `engiedata` folder. The data information is as follows:
+The data which is used for testing is Engie CSV dataset which can be found in the `engiedata` folder. The data information is as follows:
 
 | File Name           | Description                                           | #Rows  |
 |---------------------|-------------------------------------------------------|--------|
@@ -22,6 +40,7 @@ The data which is used is Engie CSV dataset which can be found in the `engiedata
 
 If you want to use other files in the process, you need to just rename your desired files to `occupancydata1` and `occupancydata2`.
 
+
 ## How to run
 
 For running the workflow, I have provided a `Makefile` to make the procedure easier. You need to clone the repository and use the commands provided in the `Makefile`.
@@ -32,7 +51,7 @@ To start, after cloning and switching to the root directory of the repository yo
 make up
 ```
 
-This will download all the necessary docker images and start the containers. This command will start 2 RDFizer, 2 Virtuoso, and 1 DeTrusty.
+This will download all the necessary docker images and start the containers. This command will start 1 RDFizer, 2 Virtuoso, and 1 DeTrusty.
 
 To run the whole semantification process at once, you can do:
 
