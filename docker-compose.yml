@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  sdmrdfizer:
+    image: asakor/sdmrdfizier:4.0.1
+    container_name: sdmrdfizer
+    hostname: sdmrdfizer
+    volumes:
+      - .:/data
+    networks:
+      - spark-net
+    depends_on:
+      - pilot2akg1
+      - pilot2akg2
+    environment:
+      - SPARQL_ENDPOINT_IP_1=pilot2akg1
+      - SPARQL_ENDPOINT_PORT_1=1111
+      - SPARQL_ENDPOINT_IP_2=pilot2akg2
+      - SPARQL_ENDPOINT_PORT_2=1111
+      - SPARQL_ENDPOINT_USER=dba
+      - SPARQL_ENDPOINT_PASSWD=dba
+      - SPARQL_ENDPOINT_GRAPH=http://platoon.eu/Pilot2A/KG1
+      - RDF_DUMP_FOLDER_PATH=/data
+    deploy:
+      restart_policy:
+        condition: any
+  
+  detrusty:
+    image: sdmtib/detrusty:0.2.0
+    container_name: detrusty
+    hostname: detrusty
+    volumes:
+      - ./DeTrusty/Config/:/DeTrusty/Config/
+    ports:
+      - 5001:5000
+    networks:
+      - spark-net
+    depends_on:
+      - pilot2akg1
+      - pilot2akg2
+    deploy:
+      restart_policy:
+        condition: any
+  
+  pilot2akg1:
+    image: kemele/virtuoso:6-stable
+    hostname: pilot2akg1
+    container_name: pilot2akg1
+    volumes:
+      - ./rdf-dump1:/data
+    ports:
+      - 8090:8090
+      - 1111:1111
+    networks:
+      - spark-net
+    deploy:
+      restart_policy:
+        condition: any
+
+  pilot2akg2:
+    image: kemele/virtuoso:6-stable
+    hostname: pilot2akg2
+    container_name: pilot2akg2
+    volumes:
+      - ./rdf-dump2:/data
+    ports:
+      - 8091:8090
+      - 1112:1111
+    networks:
+      - spark-net
+    deploy:
+      restart_policy:
+        condition: any
+
+networks:
+  spark-net:
